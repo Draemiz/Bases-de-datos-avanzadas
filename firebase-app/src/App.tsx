@@ -1,8 +1,11 @@
 import "./App.css";
 import ProductoForm from "./components/ProductoForm";
 import { ProductoLista } from "./components/ProductoLista";
+import { useState } from "react";
+import type { Producto } from "./services/productoService";
 
 function App() {
+  const [productoEditar, setProductoEditar] = useState<Producto | null>(null);
   return (
     <main className="app-shell">
       <header className="page-header">
@@ -14,8 +17,17 @@ function App() {
         <p>Registra tus productos y mantén tu inventario siempre actualizado.</p>
       </section>
       <div className="workspace">
-        <ProductoForm />
-        <ProductoLista />
+        <ProductoForm
+          key={productoEditar?.id ?? "nuevo"}
+          productoEditar={productoEditar}
+          onFinalizarEdicion={() => setProductoEditar(null)}
+        />
+        <ProductoLista
+          onEditar={setProductoEditar}
+          onProductoEliminado={(id) => {
+            setProductoEditar((actual) => actual?.id === id ? null : actual);
+          }}
+        />
       </div>
       <footer className="page-footer">Un inventario organizado empieza con buenos datos.</footer>
     </main>

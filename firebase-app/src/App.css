@@ -4,6 +4,11 @@
 .brand { display: flex; align-items: center; font-weight: 750; font-size: 22px; letter-spacing: -.7px; }
 .brand-mark { display: grid; place-items: center; background: #176b53; color: white; height: 36px; width: 36px; border-radius: 10px; margin-right: 10px; font-size: 27px; }
 .brand-dot { color: #217b60; }
+.edit-button { border: 1px solid #cdded4; border-radius: 7px; background: #f1f7f3; color: #176b53; padding: 8px 12px; font-size: 12px; font-weight: 600; }
+.edit-button:hover { background: #e2eee7; }
+.cancel-button { margin-top: 12px; width: 100%; }
+.delete-button { color: #a43a32; border-color: #ecd1cd; background: #fff5f3; margin: 4px 0 4px 6px; }
+.delete-button:hover { background: #fbe6e2; }
 .header-label { font-size: 11px; font-weight: 650; letter-spacing: 1.6px; color: #67766f; }
 .page-intro { padding: 48px 0 35px; }
 .eyebrow { color: #46715f; font-size: 10px; font-weight: 750; letter-spacing: 1.8px; margin-bottom: 10px; }

@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, updateDoc, doc, deleteDoc, type FirestoreError } from "firebase/firestore";
 import { db } from "../firebase";
 
 export interface Producto {
@@ -22,13 +22,34 @@ export const crearProducto = async (
   return docRef.id;
 };
 
-export const obtenerProductos = async (): Promise<Producto[]> => {
-  const querySnapshot = await getDocs(collection(db, "productos"));
-
-  const productos = querySnapshot.docs.map((doc) => ({
-    ...doc.data(),
-    id: doc.id,
+export const escucharProductos = (
+  onProductos: (productos: Producto[]) => void,
+  onError: (error: FirestoreError) => void
+) => onSnapshot(collection(db, "productos"), (snapshot) => {
+  const productos = snapshot.docs.map((documento) => ({
+    ...documento.data(),
+    id: documento.id,
   })) as Producto[];
 
-  return productos;
+  onProductos(productos);
+}, onError);
+
+export const actualizarProducto = async (
+  id: string,
+  nombre: string,
+  precio: number,
+  stock: number
+) => {
+  const productRef = doc(db, "productos", id);
+
+  await updateDoc(productRef, {
+    nombre,
+    precio,
+    stock,
+  });
+};
+
+export const eliminarProducto = async (id: string) => {
+  const productoRef = doc(db, "productos", id);
+  await deleteDoc(productoRef);
 };
