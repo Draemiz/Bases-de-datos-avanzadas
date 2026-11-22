@@ -39,38 +39,51 @@ export const ProductoLista = ({ onEditar, onProductoEliminado }: Props) => {
       </div>
       {errorProductos && <p className="form-message error-message" role="alert">{errorProductos}</p>}
       {errorEliminar && <p className="form-message error-message" role="alert">{errorEliminar}</p>}
-        <div className="table-scroll">
-          <table>
-            <caption className="sr-only">Productos registrados con su precio y existencias</caption>
-            <thead><tr>
-              <th scope="col">Producto</th>
-              <th scope="col" className="number-cell">Precio</th>
-              <th scope="col" className="number-cell">Stock</th>
-              <th scope="col">Acciones</th>
-            </tr></thead>
-            <tbody>{productos.map((producto) => (
-              <tr key={producto.id}>
-                <td><div className="product-name">{producto.nombre}</div><span className="product-id">ID: {producto.id}</span></td>
-                <td className="number-cell price-cell">
-                  ${producto.precio}
-                </td>
-                <td className="number-cell">
-                  <span className={`stock-badge${producto.stock === 0 ? " stock-empty" : ""}`}>
-                    {producto.stock}<span className="stock-unit"> ud.</span>
-                  </span>
-                </td>
-                <td>
-                  <button type="button" className="edit-button" onClick={() => onEditar(producto)}>
-                    Editar
-                  </button>
-                  <button type="button" className="edit-button delete-button" onClick={() => handleEliminar(producto.id)}>
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            ))}</tbody>
-          </table>
-        </div>
+      <div className="table-scroll">
+        <table>
+          <caption className="sr-only">Productos registrados con su precio y existencias</caption>
+
+          <thead><tr>
+            <th scope="col">Producto</th>
+            <th scope="col" className="number-cell">Precio</th>
+            <th scope="col">Categoría</th>
+            <th scope="col" className="number-cell">Stock</th>
+            <th scope="col">Acciones</th>
+          </tr></thead>
+
+          <tbody>{productos.map((producto) => (
+            <tr key={producto.id}>
+
+              <td><div className="product-name">
+                {producto.nombre}
+
+              </div><span className="product-id">
+                ID: {producto.id}</span></td>
+
+              <td className="number-cell price-cell">
+                ${producto.precio}
+              </td>
+
+              <td>{producto.categoria || "Sin categoría"}</td>
+              <td className="number-cell">
+                <span className={`stock-badge${producto.stock === 0 ? " stock-empty" : ""}`}>
+                  {producto.stock}<span className="stock-unit"> ud.</span>
+                </span>
+              </td>
+              <td>
+                <button type="button" className="edit-button"
+                onClick={() => onEditar(producto)}>
+                  Editar
+                </button>
+                <button type="button" className="edit-button delete-button"
+                onClick={() => handleEliminar(producto.id)}>
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          ))}</tbody>
+        </table>
+      </div>
       <div className="inventory-footer">La lista se actualiza en tiempo real.</div>
     </section>
   );
