@@ -1,6 +1,8 @@
 import "./App.css";
 import ProductoForm from "./components/ProductoForm";
 import { ProductoLista } from "./components/ProductoLista";
+import { ProductoListaPaginada } from "./components/ProductoListaPaginada";
+import { ArticuloOtakuListaPaginada } from "./components/ArticuloOtakuListaPaginada";
 import { useState } from "react";
 import { obtenerProductosDisponibles, type Producto } from "./services/productoService";
 
@@ -43,6 +45,8 @@ function App() {
       >
         Consulta
       </button>
+      <ProductoListaPaginada />
+      <ArticuloOtakuListaPaginada />
       <footer className="page-footer">Un inventario organizado empieza con buenos datos.</footer>
     </main>
   );

@@ -400,3 +400,15 @@ tbody tr:hover {
     padding: 16px;
   }
 }
+
+.otaku-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.otaku-pagination button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
