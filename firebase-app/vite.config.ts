@@ -4,4 +4,12 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  build: {
+    rolldownOptions: {
+      input: {
+        principal: "index.html",
+        hoteles: "hoteles.html",
+      },
+    },
+  },
 })

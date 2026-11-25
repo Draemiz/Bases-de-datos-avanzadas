@@ -459,3 +459,18 @@ tbody tr:hover {
     padding-inline: 16px;
   }
 }
+
+.section-nav {
+  padding: 20px 0;
+}
+
+.section-nav a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.hoteles-divider {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid #c7d4ca;
+}

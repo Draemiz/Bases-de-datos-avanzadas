@@ -1,8 +1,11 @@
 import "./App.css";
+import { DirectorioAlojamientos } from "./components/DirectorioAlojamientos";
 import ProductoForm from "./components/ProductoForm";
 import { ProductoLista } from "./components/ProductoLista";
 import { ProductoListaPaginada } from "./components/ProductoListaPaginada";
 import { ArticuloOtakuListaPaginada } from "./components/ArticuloOtakuListaPaginada";
+import { ModeloMatriculas } from "./components/ModeloMatriculas";
+import { ConsultaMatriculas } from "./components/ConsultaMatriculas";
 import { useState } from "react";
 import { obtenerProductosDisponibles, type Producto } from "./services/productoService";
 
@@ -22,7 +25,17 @@ function App() {
         <div className="brand"><span className="brand-mark" aria-hidden="true">▦</span>Inventario<span className="brand-dot">.</span></div>
         <span className="header-label">GESTIÓN DE PRODUCTOS</span>
       </header>
-      <section className="page-intro">
+      <nav className="section-nav catalog-actions" aria-label="Secciones de la aplicación">
+        <a className="edit-button" href="./hoteles.html">Gestión de hoteles</a>
+        <a className="edit-button" href="#inventario">Inventario de productos</a>
+        <a className="edit-button" href="#paginacion-title">Productos paginados</a>
+        <a className="edit-button" href="#otaku-title">El Bazar del Eclipse</a>
+        <a className="edit-button" href="#matriculas-title">Modelo de matrículas</a>
+        <a className="edit-button" href="#consulta-matriculas-title">Consulta de matrículas</a>
+      </nav>
+      <DirectorioAlojamientos />
+      <hr className="hoteles-divider" />
+      <section id="inventario" className="page-intro">
         <h1>Todo en su lugar.</h1>
         <p>Registra tus productos y mantén tu inventario siempre actualizado.</p>
       </section>
@@ -42,6 +55,8 @@ function App() {
       <div className="catalog-sections">
         <ProductoListaPaginada onConsulta={consultarProductos} />
         <ArticuloOtakuListaPaginada />
+        <ModeloMatriculas />
+        <ConsultaMatriculas />
       </div>
       <footer className="page-footer">Un inventario organizado empieza con buenos datos.</footer>
     </main>
