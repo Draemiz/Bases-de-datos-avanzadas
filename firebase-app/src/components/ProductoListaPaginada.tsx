@@ -3,7 +3,11 @@ import { obtenerProductosPaginados, type Producto } from "../services/productoSe
 
 type Cursor = Awaited<ReturnType<typeof obtenerProductosPaginados>>["ultimoDocumento"];
 
-export const ProductoListaPaginada = () => {
+interface Props {
+  onConsulta: () => void;
+}
+
+export const ProductoListaPaginada = ({ onConsulta }: Props) => {
   const [productos, setProductos] = useState<Producto[]>();
   const [ultimoDocumento, setUltimoDocumento] = useState<Cursor>();
   const [cargando, setCargando] = useState(false);
@@ -34,26 +38,38 @@ export const ProductoListaPaginada = () => {
 
   return (
     <section className="panel inventory-panel" aria-labelledby="paginacion-title">
-      <h2 id="paginacion-title">Productos paginados</h2>
-      <button type="button" className="edit-button" disabled={cargando} onClick={cargarPrimeraPagina}>
-        Cargar productos
-      </button>
+      <div className="inventory-header paginated-products-header">
+        <h2 id="paginacion-title">Productos paginados</h2>
+        <div className="catalog-actions">
+          <button type="button" className="edit-button" disabled={cargando} onClick={cargarPrimeraPagina}>
+            Cargar productos
+          </button>
+          <button type="button" className="edit-button" onClick={onConsulta}>
+            Consulta
+          </button>
+        </div>
+      </div>
 
-      {error && <p role="alert">{error}</p>}
-      {cargando && <p role="status">Cargando productos…</p>}
-      {productos?.length === 0 && <p>No hay productos en esta página.</p>}
+      {error && <p className="catalog-message error-message" role="alert">{error}</p>}
+      {cargando && <p className="catalog-message" role="status">Cargando productos…</p>}
+      {productos?.length === 0 && <p className="catalog-message">No hay productos en esta página.</p>}
 
-      <ul>
-        {productos?.map((producto) => (
-          <li key={producto.id}>
-            {producto.nombre} · ${producto.precio} · {producto.stock} ud.
-          </li>
-        ))}
-      </ul>
+      {!!productos?.length && (
+        <ul className="paginated-products-list">
+          {productos.map((producto) => (
+            <li key={producto.id}>
+              <strong>{producto.nombre}</strong>
+              <span>${producto.precio} · {producto.stock} ud.</span>
+            </li>
+          ))}
+        </ul>
+      )}
 
-      <button type="button" className="edit-button" disabled={!ultimoDocumento || cargando} onClick={siguientePagina}>
-        Siguiente
-      </button>
+      <div className="inventory-footer catalog-actions">
+        <button type="button" className="edit-button" disabled={!ultimoDocumento || cargando} onClick={siguientePagina}>
+          Siguiente
+        </button>
+      </div>
     </section>
   );
 };

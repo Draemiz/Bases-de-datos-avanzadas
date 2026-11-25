@@ -401,14 +401,61 @@ tbody tr:hover {
   }
 }
 
+.catalog-sections {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 36px);
+  margin-top: clamp(20px, 4vw, 36px);
+}
+
+.paginated-products-header {
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e4ebe6;
+}
+
+.catalog-actions,
 .otaku-pagination {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
+.otaku-pagination {
+  border-top: 1px solid #e4ebe6;
+}
+
+.catalog-actions button:disabled,
 .otaku-pagination button:disabled {
   opacity: 0.55;
   cursor: default;
+}
+
+.catalog-message {
+  margin: 16px 26px 0;
+}
+
+.paginated-products-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 26px;
+}
+
+.paginated-products-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid #edf0ee;
+}
+
+@media (max-width: 760px) {
+  .catalog-message {
+    margin-inline: 16px;
+  }
+
+  .paginated-products-list {
+    padding-inline: 16px;
+  }
 }

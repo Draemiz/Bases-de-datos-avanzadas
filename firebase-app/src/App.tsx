@@ -8,6 +8,14 @@ import { obtenerProductosDisponibles, type Producto } from "./services/productoS
 
 function App() {
   const [productoEditar, setProductoEditar] = useState<Producto | null>(null);
+  const consultarProductos = async () => {
+    try {
+      console.log(await obtenerProductosDisponibles());
+    } catch (error) {
+      console.error("Error al consultar productos disponibles:", error);
+    }
+  };
+
   return (
     <main className="app-shell">
       <header className="page-header">
@@ -31,22 +39,10 @@ function App() {
           }}
         />
       </div>
-      <button
-        type="button"
-        className="edit-button"
-        onClick={async () => {
-          try {
-            const productosDeConsulta = await obtenerProductosDisponibles();
-            console.log(productosDeConsulta);
-          } catch (error) {
-            console.error("Error al consultar productos disponibles:", error);
-          }
-        }}
-      >
-        Consulta
-      </button>
-      <ProductoListaPaginada />
-      <ArticuloOtakuListaPaginada />
+      <div className="catalog-sections">
+        <ProductoListaPaginada onConsulta={consultarProductos} />
+        <ArticuloOtakuListaPaginada />
+      </div>
       <footer className="page-footer">Un inventario organizado empieza con buenos datos.</footer>
     </main>
   );
